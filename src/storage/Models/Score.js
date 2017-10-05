@@ -4,6 +4,10 @@ import Scenario from './Scenario'
 import User from './User'
 
 export default class Score extends Model {
+  static get collectionName () {
+    return 'scores'
+  }
+
   get scenario () {
     return this.belongsTo(new Scenario())
   }

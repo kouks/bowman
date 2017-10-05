@@ -2,10 +2,6 @@ import Storage from 'js-cookie'
 import merge from 'webpack-merge'
 
 export default class Model {
-  static get collectionName () {
-    return this.name.toLowerCase() + 's'
-  }
-
   /**
    * Queries
    */
