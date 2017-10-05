@@ -20,7 +20,7 @@ export default class Arrow extends Projectile {
   drawProjectile (position, angle) {
     this.context.clearRect(0, 0, this.boundaries.w, this.boundaries.h)
 
-    if (position.y !== 0) {
+    if (position.y > 0) {
       return this.drawArrow(position, angle)
     }
 

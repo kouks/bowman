@@ -1,4 +1,4 @@
-import Balistics from '@/game/Balistics'
+import Ballistics from '@/game/Ballistics'
 
 export default class Projectile {
   get speed () {
@@ -63,7 +63,7 @@ export default class Projectile {
       return this.trajectory.angle
     }
 
-    return Balistics.angle(previousPosition, this.path[x])
+    return Ballistics.angle(previousPosition, this.path[x])
   }
 
   getTime () {
@@ -86,7 +86,7 @@ export default class Projectile {
 
   drawMark (position) {
     this.context.beginPath()
-    this.context.arc(position.x, position.y, 4, 0, 2 * Math.PI, false)
+    this.context.arc(position.x, 0, 4, 0, 2 * Math.PI, false)
     this.context.lineWidth = 2
     this.context.strokeStyle = this.color
     this.context.stroke()

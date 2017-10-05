@@ -1,4 +1,4 @@
-export default class Balistics {
+export default class Ballistics {
   static get gravitationalAcceleration () {
     return 9.81
   }
@@ -12,7 +12,7 @@ export default class Balistics {
   }
 
   static power (maxPower, initialPoint, currentPoint) {
-    let [a, b] = Balistics.getSides(initialPoint, currentPoint)
+    let [a, b] = Ballistics.getSides(initialPoint, currentPoint)
 
     return Math.min(maxPower, Math.abs(Math.round(
       Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2))
@@ -20,7 +20,7 @@ export default class Balistics {
   }
 
   static angle (initialPoint, currentPoint) {
-    let [a, b] = Balistics.getSides(initialPoint, currentPoint)
+    let [a, b] = Ballistics.getSides(initialPoint, currentPoint)
 
     return Math.atan((-b / a))
   }
@@ -37,16 +37,14 @@ export default class Balistics {
 
     return Math.round(
       x * Math.tan(angle) -
-      (Balistics.gravitationalAcceleration * weight * Math.pow(x, 2)) /
+      (Ballistics.gravitationalAcceleration * weight * Math.pow(x, 2)) /
       (2 * (Math.pow(adjustedPower * Math.cos(angle), 2)))
     )
   }
 
   static adjustPower (power, wind) {
-    return (power * Balistics.powerMultiplier) + (wind * Balistics.windMultiplier)
+    return (power * Ballistics.powerMultiplier) + (wind * Ballistics.windMultiplier)
   }
 }
 
 // redesign scenario listing
-// Draw an actual arrow
-// Different way to handle arrow drawing (Animation class?)

@@ -1,4 +1,4 @@
-import Balistics from './Balistics'
+import Ballistics from './Ballistics'
 
 export default class Trajectory {
   constructor (collider, startPoint, power, angle, wind) {
@@ -20,7 +20,7 @@ export default class Trajectory {
     let lastY = 0
 
     for (let x = 0; x < this.boundaries.w; x++) {
-      let y = Balistics.getY(
+      let y = Ballistics.getY(
         x, this.angle, this.power, this.wind, projectile.weight
       )
 
@@ -43,7 +43,7 @@ export default class Trajectory {
   getPosition (x, y) {
     return {
       x: x + this.startPoint.x,
-      y: (this.startPoint.y - y) < 0 ? 0 : this.startPoint.y - y
+      y: this.startPoint.y - y
     }
   }
 

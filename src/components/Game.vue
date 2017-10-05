@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import Balistics from '@/game/Balistics'
+import Ballistics from '@/game/Ballistics'
 import Collider from '@/game/Collider'
 import Trajectory from '@/game/Trajectory'
 import Terrain from '@/game/Terrain'
@@ -95,11 +95,11 @@ export default {
 
   computed: {
     power () {
-      return Balistics.power(this.maxPower, this.initialPoint, this.currentPoint)
+      return Ballistics.power(this.maxPower, this.initialPoint, this.currentPoint)
     },
 
     angle () {
-      return Balistics.angle(this.initialPoint, this.currentPoint)
+      return Ballistics.angle(this.initialPoint, this.currentPoint)
     },
 
     remainingProjectiles () {
