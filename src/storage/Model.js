@@ -17,8 +17,9 @@ export default class Model {
   static create (data) {
     let collection = this.all()
     let instance = new this()
+    data = merge(data, { id: this.generateId() })
 
-    collection.push(merge(data, { id: this.generateId() }))
+    collection.push(data)
 
     this.setCollection(collection)
 
@@ -40,6 +41,22 @@ export default class Model {
     this.setCollection(result)
   }
 
+  static where (query) {
+    let collection = this.all()
+    let instance = new this()
+    let result = collection.filter((row) => {
+      for (let column in query) {
+        if (row[column] !== query[column]) {
+          return false
+        }
+      }
+
+      return true
+    })
+
+    return this.hydrateMany(instance, result)
+  }
+
   static clear () {
     this.setCollection([])
   }
@@ -52,7 +69,7 @@ export default class Model {
     let collectionName = model.constructor.collectionName
     let collection = model.constructor.getCollection()
     let key = `${collectionName.substr(0, collectionName.length - 1)}_id`
-    let result = collection.filter(row => row.id === this[key]).pop()
+    let result = collection.filter(row => parseInt(row.id) === parseInt(this[key])).pop()
 
     return result === undefined ? result : model.getInstance().hydrate(result)
   }
@@ -61,7 +78,7 @@ export default class Model {
     let collectionName = this.constructor.collectionName
     let collection = model.constructor.getCollection()
     let key = `${collectionName.substr(0, collectionName.length - 1)}_id`
-    let results = collection.filter(row => row[key] === this.id)
+    let results = collection.filter(row => parseInt(row[key]) === parseInt(this.id))
 
     return this.constructor.hydrateMany(model, results)
   }

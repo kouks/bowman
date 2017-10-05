@@ -37,26 +37,29 @@
 </template>
 
 <script>
-import Balistics from '../game/Balistics'
-import Collider from '../game/Collider'
-import Trajectory from '../game/Trajectory'
-import Terrain from '../game/Terrain'
+import Balistics from '@/game/Balistics'
+import Collider from '@/game/Collider'
+import Trajectory from '@/game/Trajectory'
+import Terrain from '@/game/Terrain'
 
-import Environment from '../mixins/game/Environment'
-import EndGame from '../mixins/game/EndGame'
+import Auth from '@/auth/Auth'
 
-import Helpers from '../mixins/Helpers'
-import Colors from '../mixins/Colors'
+import Environment from '@/mixins/game/Environment'
+import EndGame from '@/mixins/game/EndGame'
 
-import Arrow from '../game/Projectiles/Arrow'
+import Helpers from '@/mixins/Helpers'
+import Colors from '@/mixins/Colors'
+import Fonts from '@/mixins/Fonts'
 
-import Sprite from '../game/Sprites/Default'
+import Arrow from '@/game/Projectiles/Arrow'
 
-import Scenario from '../storage/Models/Scenario'
-import Score from '../storage/Models/Score'
+import Sprite from '@/game/Sprites/Default'
+
+import Scenario from '@/storage/Models/Scenario'
+import Score from '@/storage/Models/Score'
 
 export default {
-  mixins: [Environment, EndGame, Helpers, Colors],
+  mixins: [Environment, EndGame, Helpers, Colors, Fonts],
 
   data () {
     return {
@@ -71,17 +74,9 @@ export default {
 
       // Scenario
       scenario: null,
-
-      // Collider instance
       collider: new Collider(),
-
-      // Terrain
       terrain: [],
-
-      // Sprite instance
       sprite: new Sprite(30, 500, 20, 50),
-
-      // Score
       score: 0,
 
       // Shot Management
@@ -94,12 +89,7 @@ export default {
 
       // Projectiles
       landedProjectiles: [],
-      projectileCount: 10,
-
-      // Fonts
-      fonts: {
-        default: '16px Source Sans Pro'
-      }
+      projectileCount: 10
     }
   },
 
@@ -284,7 +274,11 @@ export default {
      */
 
     endGame () {
-      Score.create({ scenario_id: this.scenario.id, score: this.score })
+      Score.create({
+        scenario_id: this.scenario.id,
+        user_id: Auth.id(),
+        score: this.score
+      })
 
       this.drawEndGameScreen()
     }

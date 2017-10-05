@@ -12,7 +12,7 @@ export default {
 
 <style>
   .game {
-    padding-top: 50px;
+    padding-top: 20px;
   }
 
   .game-container {

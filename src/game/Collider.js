@@ -1,5 +1,5 @@
 import Terrain from './Terrain'
-import Exception from './Exceptions/Exception'
+import Exception from '@/exceptions/Exception'
 
 export default class Collider {
   constructor () {

@@ -4,7 +4,8 @@
       <div class="column">
         <div class="box has-text-centered">
           <h1 class="title is-1">Scenarios</h1>
-          <router-link class="button is-primary is-large is-menu" to="/">Back</router-link>
+
+          <router-link class="button is-info is-large is-menu" to="/">Back</router-link>
         </div>
       </div>
     </div>
@@ -23,10 +24,13 @@
             </div>
             <div class="column">
               <h3 class="title is-5">High Scores:</h3>
+              <p class="subtitle">Created by {{ scenario.user.username }}</p>
             </div>
             <div class="column">
               <ul>
-                <li v-for="score in orderedScores[scenario.id]">{{ score.score }}</li>
+                <li v-for="score in orderedScores[scenario.id]">
+                  {{ score.score }} achieved by {{ score.user.username }}
+                </li>
               </ul>
             </div>
             <div class="column is-narrow">
@@ -44,9 +48,10 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 import Scenario from '@/storage/Models/Scenario'
 import Terrain from '@/game/Terrain'
-import _ from 'lodash'
 
 export default {
   data () {

@@ -9,7 +9,8 @@ export default {
         summary: 'rgba(220, 220, 220, 0.6)',
         text: '#000',
         wind: '#B23432',
-        windSeparator: '#000'
+        windSeparator: '#000',
+        endGameBackground: 'rgba(255, 255, 255, 0.8)'
       }
     }
   }

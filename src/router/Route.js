@@ -11,6 +11,29 @@ export default class Route {
   }
 
   name (name) {
-    return { path: this.path, component: this.component, name }
+    this.name = name
+
+    return this
+  }
+
+  middleware (middleware) {
+    this.middleware = middleware
+
+    return this
+  }
+
+  get () {
+    return {
+      path: this.path,
+      component: this.component,
+      name: this.name,
+      beforeEnter: (to, from, next) => {
+        if (!this.middleware) {
+          return next()
+        }
+
+        return this.middleware.handle(to, from, next)
+      }
+    }
   }
 }

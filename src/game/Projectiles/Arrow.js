@@ -17,12 +17,12 @@ export default class Arrow extends Projectile {
     return '#000'
   }
 
-  drawProjectile (position) {
+  drawProjectile (position, angle) {
     this.context.clearRect(0, 0, this.boundaries.w, this.boundaries.h)
 
-    // if (position.y !== 0) {
-    //   return this.drawArrow(position, angle)
-    // }
+    if (position.y !== 0) {
+      return this.drawArrow(position, angle)
+    }
 
     return this.drawMark(position)
   }
@@ -39,7 +39,7 @@ export default class Arrow extends Projectile {
 
   calculateStartPoint (position, angle) {
     return {
-      x: position.x - this.length * Math.cos(angle),
+      x: position.x - this.length * Math.cos(Math.PI - angle),
       y: position.y - this.length * Math.sin(angle)
     }
   }

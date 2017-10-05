@@ -47,5 +47,6 @@ export default class Balistics {
   }
 }
 
+// redesign scenario listing
+// Draw an actual arrow
 // Different way to handle arrow drawing (Animation class?)
-// Login, Register, Menu, High Scores components

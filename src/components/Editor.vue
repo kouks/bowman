@@ -4,6 +4,7 @@
       <div class="column">
         <div class="box has-text-centered">
           <h1 class="title is-1">Scenario Editor</h1>
+
           <a class="button is-primary is-large is-menu" @click="saveAndExit()">Save and Exit</a>
           <a class="button is-danger is-large is-menu" @click="exit()">Cancel</a>
         </div>
@@ -60,7 +61,7 @@
           <b>Objects</b><hr>
           <ul>
             <li v-for="object in terrain">
-              <span :style="{ color: object.color }">Object</span> at {{ object.x }}, {{ object.y }}
+              <span :style="{ color: object.color }">Object</span> at {{ object.x }}, {{ object.y }}. Score: {{ object.score }}
               <a class="is-pulled-right has-text-danger" @click="removeTerrain(object)">Remove</a>
             </li>
           </ul>
@@ -72,6 +73,8 @@
 
 <script>
 import Environment from '@/mixins/editor/Environment'
+
+import Auth from '@/auth/Auth'
 
 import Helpers from '@/mixins/Helpers'
 import Colors from '@/mixins/Colors'
@@ -190,7 +193,7 @@ export default {
 
     saveAndExit () {
       if (this.terrain.length > 0) {
-        Scenario.create({ terrain: this.terrain })
+        Scenario.create({ terrain: this.terrain, user_id: Auth.id() })
       }
 
       this.exit()

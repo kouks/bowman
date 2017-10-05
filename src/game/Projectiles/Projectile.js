@@ -1,3 +1,5 @@
+import Balistics from '@/game/Balistics'
+
 export default class Projectile {
   get speed () {
     return 200
@@ -16,6 +18,7 @@ export default class Projectile {
 
   fire (trajectory, context) {
     this.trajectory = trajectory
+    this.path = this.trajectory.getTrajectory()
     this.context = context
     this.startTime = this.getTime()
 
@@ -31,13 +34,13 @@ export default class Projectile {
   }
 
   step (resolve, reject) {
-    let position = this.getNextPosition()
+    let [position, angle] = this.getNextPosition()
 
     if (position === undefined) {
       return resolve(this)
     }
 
-    this.drawProjectile(position)
+    this.drawProjectile(position, angle)
 
     return window.requestAnimationFrame(() => {
       this.step(resolve, reject)
@@ -47,7 +50,20 @@ export default class Projectile {
   getNextPosition () {
     let x = Math.round(this.getTimeFrom(this.startTime) / this.speed * 100)
 
-    return this.trajectory.getTrajectory()[x]
+    return [
+      this.path[x],
+      this.getAngleFor(x)
+    ]
+  }
+
+  getAngleFor (x) {
+    let previousPosition = this.path[x - 10]
+
+    if (previousPosition === undefined || this.path[x] === undefined) {
+      return this.trajectory.angle
+    }
+
+    return Balistics.angle(previousPosition, this.path[x])
   }
 
   getTime () {
