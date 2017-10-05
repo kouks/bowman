@@ -209,14 +209,6 @@ export default {
         })
     },
 
-    addLandedProjectile (projectile) {
-      this.landedProjectiles.push(projectile)
-    },
-
-    hasProjectiles () {
-      return this.remainingProjectiles > 0
-    },
-
     /**
      * Score handling.
      */

@@ -36,4 +36,4 @@ This group of components handles auth actions like logging in, registering and l
 
 
 ## Storage
-This group includes classes that handle actions concerning the HTML storage, as well as a simple ORM to help out with simple CRUD operations.
+This group includes classes that handle actions concerning the _HTML_ storage, as well as a simple _ORM_ to help out with simple _CRUD_ operations.

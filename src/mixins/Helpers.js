@@ -33,6 +33,14 @@ export default {
       this.projectileCanvasClass = 'invisible'
     },
 
+    addLandedProjectile (projectile) {
+      this.landedProjectiles.push(projectile)
+    },
+
+    hasProjectiles () {
+      return this.remainingProjectiles > 0
+    },
+
     floorTo (number, value) {
       return Math.floor(number / value) * value
     },
