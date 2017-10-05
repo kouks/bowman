@@ -5,7 +5,7 @@
 Bowman is a classic flash game, where the goal is to either shoot at other players or a target. Clicking and moving your mouse allows you to adjust power and angle of the arrow. There are, however, other factors that reflect on the trajectory of the projectile - like wind and walls. My implementation in _JavaScript_ allows shooting at targets and even creating your own scenarios.
 
 ## Technologies
-I used multiple technologies to help me with the implementation. The most impactful one is Vue.js, which is a lightweight and elegant _JavaScript_ framework that allows you to create components to organize your application.
+I used multiple technologies to help me with the implementation. The most impactful one is __Vue.js__, which is a lightweight and elegant _JavaScript_ framework that allows you to create components to organize your application.
 
 ## Structure
 ### Game
