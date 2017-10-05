@@ -4,6 +4,7 @@
       <div class="column">
         <div class="box has-text-centered">
           <h1 class="title is-1">Bowman</h1>
+          <p class="subtitle">Welcome, <span class="has-text-primary">{{ user.username }}</span>, click play and enjoy the awesomeness.</p>
 
           <router-link class="button is-primary is-large is-menu" to="/scenarios">Play</router-link>
           <router-link class="button is-primary is-large is-menu"  to="/editor">Editor</router-link>
@@ -15,7 +16,13 @@
 </template>
 
 <script>
+import Auth from '@/auth/Auth'
+
 export default {
-  //
+  data () {
+    return {
+      user: Auth.user()
+    }
+  }
 }
 </script>

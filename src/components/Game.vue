@@ -29,7 +29,8 @@
     <div class="columns">
       <div class="column">
         <div class="box has-text-centered">
-          <router-link class="button is-primary is-large is-menu" to="/">Back to Menu</router-link>
+          <router-link class="button is-info is-large is-menu" to="/">Back to Menu</router-link>
+          <router-link class="button is-info is-large is-menu" to="/scenarios">Back to Scenarios</router-link>
         </div>
       </div>
     </div>
