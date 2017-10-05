@@ -21,18 +21,49 @@
                 :width="canvasWidth"
                 :height="canvasHeight"
               ></canvas>
+              <p>Scenario by {{ scenario.user.username }}</p>
             </div>
+
             <div class="column">
-              <h3 class="title is-5">High Scores:</h3>
-              <p class="subtitle">Created by {{ scenario.user.username }}</p>
+              <div class="columns is-multiline">
+                <div class="column is-12 has-text-centered">
+                  <p class="title is-5">High Scores</p>
+                </div>
+
+                <div class="column has-text-right">
+                  <ul>
+                    <li v-for="score in orderedScores[scenario.id]">
+                      <strong>{{ score.score }}</strong>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="column">
+                  <ul>
+                    <li v-for="score in orderedScores[scenario.id]">
+                      {{ score.user.username }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+
             <div class="column">
-              <ul>
-                <li v-for="score in orderedScores[scenario.id]">
-                  {{ score.score }} achieved by {{ score.user.username }}
-                </li>
-              </ul>
+              <div class="columns is-multiline">
+                <div class="column is-12 has-text-centered">
+                  <p class="title is-5">People who Attempted</p>
+                </div>
+
+                <div class="column has-text-centered">
+                  <ul>
+                    <li v-for="user in attempted[scenario.id]">
+                      <strong>{{ user }}</strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
+
             <div class="column is-narrow">
               <router-link
                 style="height: 100%; padding: 0 50px;"
@@ -60,7 +91,10 @@ export default {
 
       canvasHeight: 120,
       canvasWidth: 200,
-      canvasScale: 0.2
+      canvasScale: 0.2,
+
+      countHighScores: 4,
+      countAttempted: 4
     }
   },
 
@@ -69,10 +103,22 @@ export default {
       let scores = {}
 
       this.scenarios.forEach((scenario) => {
-        scores[scenario.id] = _.orderBy(scenario.scores, 'score', 'desc').slice(0, 5)
+        scores[scenario.id] = _.orderBy(scenario.scores, 'score', 'desc').slice(0, this.countHighScores)
       })
 
       return scores
+    },
+
+    attempted () {
+      let users = {}
+
+      this.scenarios.forEach((scenario) => {
+        users[scenario.id] = _.uniq(scenario.scores.map((score) => {
+          return score.user.username
+        })).slice(0, this.countAttempted)
+      })
+
+      return users
     }
   },
 

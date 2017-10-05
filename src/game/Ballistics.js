@@ -46,5 +46,3 @@ export default class Ballistics {
     return (power * Ballistics.powerMultiplier) + (wind * Ballistics.windMultiplier)
   }
 }
-
-// redesign scenario listing
