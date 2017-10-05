@@ -9,7 +9,7 @@ I used multiple technologies to help me with the implementation. The most impact
 
 ## Structure
 ### Game
-The most important component that my application includes is a without a doubt `Game` component. This component has a _JavaScript_ canvas, on which the game is rendered. It is also dependant on many other classes, that provide crucial functionality.
+The most important component that my application includes is without a doubt the `Game` component. This component has a _JavaScript_ canvas, on which the game is rendered. It is also dependant on many other classes, that provide crucial functionality.
 ### Collider
 This class is responsible for registering all objects present in the scenario, and upon request, determines whether the projectile collides with any of them.
 ### Terrain
