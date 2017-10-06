@@ -1,4 +1,4 @@
-import Storage from 'js-cookie'
+import Storage from 'local-storage'
 import User from '@/storage/Models/User'
 import Exception from '@/exceptions/Exception'
 

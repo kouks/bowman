@@ -1,4 +1,4 @@
-import Storage from 'js-cookie'
+import Storage from 'local-storage'
 import merge from 'webpack-merge'
 
 export default class Model {
@@ -27,7 +27,7 @@ export default class Model {
     let instance = new this()
     let result = collection.filter(row => row.id === parseInt(id)).pop()
 
-    return result === undefined ? result : instance.hydrate(result)
+    return result ? instance.hydrate(result) : null
   }
 
   static delete (id) {
@@ -67,7 +67,7 @@ export default class Model {
     let key = `${collectionName.substr(0, collectionName.length - 1)}_id`
     let result = collection.filter(row => parseInt(row.id) === parseInt(this[key])).pop()
 
-    return result === undefined ? result : model.getInstance().hydrate(result)
+    return result ? model.getInstance().hydrate(result) : null
   }
 
   hasMany (model) {
@@ -92,9 +92,9 @@ export default class Model {
   }
 
   static getCollection () {
-    let collection = Storage.getJSON(this.collectionName)
+    let collection = Storage.get(this.collectionName)
 
-    return collection === undefined ? [] : collection
+    return collection || []
   }
 
   static hydrateMany (model, data) {
