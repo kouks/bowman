@@ -29,6 +29,18 @@
       </div>
     </div>
 
+    <div class="columns" v-show="showHint">
+      <div class="column">
+        <div class="box">
+          <span class="is-pulled-right">
+            <i class="fa fa-times" aria-hidden="true" @click="showHint = false" style="cursor: pointer;"></i>
+          </span>
+
+          <p><strong>Hint: </strong>Select area by clicking and dragging your mouse, then choose color and score of the terrain and click "Add Terrain".</p>
+        </div>
+      </div>
+    </div>
+
     <div class="columns">
       <div class="column">
         <div class="box">
@@ -52,7 +64,7 @@
             >{{ score }}</span>
           </div>
           <hr>
-          <button class="button is-primary" @click="createTerrain()">Add</button>
+          <button class="button is-primary" @click="createTerrain()">Add Terrain</button>
         </div>
       </div>
 
@@ -118,7 +130,10 @@ export default {
       ],
       terrainScorePresets: [
         0, 5, 10, 50, 100, 500, 1000, 5000, 10000
-      ]
+      ],
+
+      // Hint
+      showHint: true
     }
   },
 

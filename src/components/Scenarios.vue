@@ -5,6 +5,7 @@
         <div class="box has-text-centered">
           <h1 class="title is-1">Scenarios</h1>
 
+          <router-link class="button is-primary is-large is-menu" to="/editor">Create New Scenario</router-link>
           <router-link class="button is-info is-large is-menu" to="/">Back</router-link>
         </div>
       </div>
