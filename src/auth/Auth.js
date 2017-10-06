@@ -29,7 +29,7 @@ export default class Auth {
   /**
    * Returns logged-in user.
    *
-   * @return User user
+   * @return User
    */
   static user () {
     return User.find(this.id())
