@@ -25,14 +25,14 @@ export default class Model {
   static find (id) {
     let collection = this.all()
     let instance = new this()
-    let result = collection.filter(row => row.id === parseInt(id)).pop()
+    let result = collection.filter(row => row.id === id).pop()
 
     return result ? instance.hydrate(result) : null
   }
 
   static delete (id) {
     let collection = this.all()
-    let result = collection.filter(row => row.id !== parseInt(id))
+    let result = collection.filter(row => row.id !== id)
 
     this.setCollection(result)
   }
@@ -65,7 +65,7 @@ export default class Model {
     let collectionName = model.constructor.collectionName
     let collection = model.constructor.getCollection()
     let key = `${collectionName.substr(0, collectionName.length - 1)}_id`
-    let result = collection.filter(row => parseInt(row.id) === parseInt(this[key])).pop()
+    let result = collection.filter(row => row.id === this[key]).pop()
 
     return result ? model.getInstance().hydrate(result) : null
   }
@@ -74,7 +74,7 @@ export default class Model {
     let collectionName = this.constructor.collectionName
     let collection = model.constructor.getCollection()
     let key = `${collectionName.substr(0, collectionName.length - 1)}_id`
-    let results = collection.filter(row => parseInt(row[key]) === parseInt(this.id))
+    let results = collection.filter(row => row[key] === this.id)
 
     return this.constructor.hydrateMany(model, results)
   }

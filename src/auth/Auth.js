@@ -20,7 +20,7 @@ export default class Auth {
   }
 
   static id () {
-    return parseInt(Storage.get('user_id'))
+    return Storage.get('user_id')
   }
 
   static logged () {
