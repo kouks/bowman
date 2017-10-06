@@ -89,16 +89,15 @@
 </template>
 
 <script>
+import Sprite from '@/game/Sprite'
+import Terrain from '@/game/Terrain'
+
 import Environment from '@/mixins/editor/Environment'
 
 import Auth from '@/auth/Auth'
 
-import Helpers from '@/mixins/Helpers'
 import Colors from '@/mixins/Colors'
-
-import Terrain from '@/game/Terrain'
-
-import Sprite from '@/game/Sprites/Default'
+import Helpers from '@/mixins/Helpers'
 
 import Scenario from '@/storage/Models/Scenario'
 

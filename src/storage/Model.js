@@ -3,13 +3,20 @@ import merge from 'webpack-merge'
 
 export default class Model {
   /**
-   * Queries
+   * Rerturns all rows from a collection.
+   *
+   * @return array
    */
-
   static all () {
     return this.hydrateMany(new this(), this.getCollection())
   }
 
+  /**
+   * Creates a new row on a collection.
+   *
+   * @param  Object data
+   * @return Model
+   */
   static create (data) {
     let collection = this.all()
     let instance = new this()
@@ -22,6 +29,12 @@ export default class Model {
     return instance.hydrate(data)
   }
 
+  /**
+   * Finds a row by provided ID.
+   *
+   * @param  int id
+   * @return Model|null
+   */
   static find (id) {
     let collection = this.all()
     let instance = new this()
@@ -30,6 +43,12 @@ export default class Model {
     return result ? instance.hydrate(result) : null
   }
 
+  /**
+   * Deletes a row by provided ID.
+   *
+   * @param  int id
+   * @return void
+   */
   static delete (id) {
     let collection = this.all()
     let result = collection.filter(row => row.id !== id)
@@ -37,6 +56,12 @@ export default class Model {
     this.setCollection(result)
   }
 
+  /**
+   * Filters rows by provided query.
+   *
+   * @param  Object query
+   * @return array
+   */
   static where (query) {
     let collection = this.all()
     let instance = new this()
@@ -53,14 +78,21 @@ export default class Model {
     return this.hydrateMany(instance, result)
   }
 
+  /**
+   * Clears out the entire collection
+   *
+   * @return void
+   */
   static clear () {
     this.setCollection([])
   }
 
   /**
-   * Relationships
+   * Defines a belongs-to relationship.
+   *
+   * @param  Model model
+   * @return Model
    */
-
   belongsTo (model) {
     let collectionName = model.constructor.collectionName
     let collection = model.constructor.getCollection()
@@ -70,6 +102,12 @@ export default class Model {
     return result ? model.getInstance().hydrate(result) : null
   }
 
+  /**
+   * Defines a has-many relationship.
+   *
+   * @param  Model model
+   * @return array
+   */
   hasMany (model) {
     let collectionName = this.constructor.collectionName
     let collection = model.constructor.getCollection()
@@ -80,23 +118,42 @@ export default class Model {
   }
 
   /**
-   * Helpers
+   * Generates an unique identifier.
+   *
+   * @return int
    */
-
   static generateId () {
     return (new Date()).getTime()
   }
 
+  /**
+   * Rewrites the collection to provided data.
+   *
+   * @param  array data
+   * @return void
+   */
   static setCollection (data) {
     Storage.set(this.collectionName, data)
   }
 
+  /**
+   * Returns the entire collection.
+   *
+   * @return array
+   */
   static getCollection () {
     let collection = Storage.get(this.collectionName)
 
     return collection || []
   }
 
+  /**
+   * Hydrates models with provided data.
+   *
+   * @param  Model model
+   * @param  array data
+   * @return array
+   */
   static hydrateMany (model, data) {
     let collection = []
 
@@ -107,6 +164,12 @@ export default class Model {
     return collection
   }
 
+  /**
+   * Hydrates a model with provided data
+   *
+   * @param  array data
+   * @return Model
+   */
   hydrate (data) {
     for (let key in data) {
       this[key] = data[key]
@@ -115,6 +178,11 @@ export default class Model {
     return this
   }
 
+  /**
+   * Returns a new instane of given class.
+   *
+   * @return Model
+   */
   getInstance () {
     return new this.constructor()
   }

@@ -38,26 +38,24 @@
 </template>
 
 <script>
-import Ballistics from '@/game/Ballistics'
-import Collider from '@/game/Collider'
-import Trajectory from '@/game/Trajectory'
+import Sprite from '@/game/Sprite'
 import Terrain from '@/game/Terrain'
+import Collider from '@/game/Collider'
+import Ballistics from '@/game/Ballistics'
+import Trajectory from '@/game/Trajectory'
+import Projectile from '@/game/Projectile'
 
 import Auth from '@/auth/Auth'
 
-import Environment from '@/mixins/game/Environment'
 import EndGame from '@/mixins/game/EndGame'
+import Environment from '@/mixins/game/Environment'
 
-import Helpers from '@/mixins/Helpers'
-import Colors from '@/mixins/Colors'
 import Fonts from '@/mixins/Fonts'
+import Colors from '@/mixins/Colors'
+import Helpers from '@/mixins/Helpers'
 
-import Arrow from '@/game/Projectiles/Arrow'
-
-import Sprite from '@/game/Sprites/Default'
-
-import Scenario from '@/storage/Models/Scenario'
 import Score from '@/storage/Models/Score'
+import Scenario from '@/storage/Models/Scenario'
 
 export default {
   mixins: [Environment, EndGame, Helpers, Colors, Fonts],
@@ -84,7 +82,6 @@ export default {
       startPoint: {},
       currentPoint: {},
       drawing: false,
-      maxPower: 300,
       wind: 0,
       maxWind: 50,
 
@@ -96,7 +93,7 @@ export default {
 
   computed: {
     power () {
-      return Ballistics.power(this.maxPower, this.initialPoint, this.currentPoint)
+      return Ballistics.power(this.initialPoint, this.currentPoint)
     },
 
     angle () {
@@ -185,7 +182,7 @@ export default {
        */
       this.showProjectileCanvas()
 
-      let projectile = new Arrow()
+      let projectile = new Projectile()
       let trajectory = new Trajectory(
         this.collider,
         this.sprite.projectileStart(),
