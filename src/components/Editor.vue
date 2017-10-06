@@ -5,7 +5,12 @@
         <div class="box has-text-centered">
           <h1 class="title is-1">Scenario Editor</h1>
 
-          <a class="button is-primary is-large is-menu" @click="saveAndExit()">Save and Exit</a>
+          <a class="button is-primary is-large is-menu" v-show="terrain.length > 0" @click="saveAndExit()">
+            Save and Exit
+          </a>
+          <a class="button is-primary is-large is-menu" v-show="terrain.length > 0" @click="saveAndPlay()">
+            Save and Play
+          </a>
           <a class="button is-danger is-large is-menu" @click="exit()">Cancel</a>
         </div>
       </div>
@@ -207,11 +212,23 @@ export default {
      */
 
     saveAndExit () {
-      if (this.terrain.length > 0) {
-        Scenario.create({ terrain: this.terrain, user_id: Auth.id() })
-      }
+      this.save()
 
       this.exit()
+    },
+
+    saveAndPlay () {
+      let scenario = this.save()
+
+      this.$router.push({ name: 'game', params: { scenario: scenario.id } })
+    },
+
+    save () {
+      if (this.terrain.length > 0) {
+        return Scenario.create({ terrain: this.terrain, user_id: Auth.id() })
+      }
+
+      return false
     },
 
     exit () {

@@ -23,6 +23,13 @@
                 :height="canvasHeight"
               ></canvas>
               <p>Scenario by {{ scenario.user.username }}</p>
+              <a
+                @click="removeScenario(scenario.id)"
+                v-show="user.id === scenario.user.id"
+                class="has-text-danger"
+              >
+                Remove Scenario
+              </a>
             </div>
 
             <div class="column">
@@ -85,6 +92,8 @@ import _ from 'lodash'
 import Scenario from '@/storage/Models/Scenario'
 import Terrain from '@/game/Terrain'
 
+import Auth from '@/auth/Auth'
+
 export default {
   data () {
     return {
@@ -95,7 +104,9 @@ export default {
       canvasScale: 0.2,
 
       countHighScores: 4,
-      countAttempted: 4
+      countAttempted: 4,
+
+      user: Auth.user()
     }
   },
 
@@ -137,6 +148,12 @@ export default {
           Terrain.fromObject(object).render(context, this.canvasScale)
         })
       })
+    },
+
+    removeScenario (id) {
+      Scenario.delete(id)
+
+      this.scenarios = this.scenarios.filter(scenario => scenario.id !== id)
     }
   }
 }
