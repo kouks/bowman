@@ -25,7 +25,7 @@ export default class Model {
   static find (id) {
     let collection = this.all()
     let instance = new this()
-    let result = collection.filter(row => row.id === id).pop()
+    let result = collection.filter(row => row.id === parseInt(id)).pop()
 
     return result ? instance.hydrate(result) : null
   }
