@@ -2,9 +2,12 @@
   <div class="game">
     <div class="columns">
       <div class="column is-6 is-offset-3">
+
+        <!-- The login box -->
         <div class="box">
           <h1 class="title is-1 has-text-centered">Login</h1>
 
+          <!-- The username field -->
           <div class="field">
             <label class="label">Username</label>
             <div class="control">
@@ -17,6 +20,7 @@
             </div>
           </div>
 
+          <!-- The password field -->
           <div class="field">
             <label class="label">Password</label>
             <div class="control">
@@ -30,6 +34,7 @@
             <p class="help is-danger" v-show="incorrectCredentials">Incorrect credentials.</p>
           </div>
 
+          <!-- The actions -->
           <div class="field is-grouped">
             <div class="control">
               <button class="button is-primary" @click="attemptLogin()">Login</button>

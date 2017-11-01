@@ -2,6 +2,7 @@
   <div class="game">
     <div class="columns">
       <div class="column">
+        <!-- Scenario Editor Menu -->
         <div class="box has-text-centered">
           <h1 class="title is-1">Scenario Editor</h1>
 
@@ -18,6 +19,7 @@
 
     <div class="columns">
       <div class="column">
+        <!-- The Editor Container and HTML Canvas -->
         <div class="box game-container">
           <canvas
             class="game-canvas"
@@ -34,6 +36,7 @@
       </div>
     </div>
 
+    <!-- Quick Hint -->
     <div class="columns" v-show="showHint">
       <div class="column">
         <div class="box">
@@ -46,10 +49,13 @@
       </div>
     </div>
 
+    <!-- Terrain creation tools -->
     <div class="columns">
       <div class="column">
         <div class="box">
           <b>Create Terrain</b><hr>
+
+          <!-- Color selection -->
           <div class="field">
             <label class="label">Color</label>
             <span
@@ -60,6 +66,7 @@
             ></span>
           </div>
 
+          <!-- Score selection -->
           <div class="field">
             <label class="label">Score</label>
             <span
@@ -73,6 +80,7 @@
         </div>
       </div>
 
+      <!-- List of existing objects -->
       <div class="column">
         <div class="box">
           <b>Objects</b><hr>
@@ -266,6 +274,9 @@ export default {
 </script>
 
 <style scoped>
+  /*
+   * Define color sample styles.
+   */
   .colorSample {
     box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
     border: 3px solid #fff;
@@ -281,6 +292,9 @@ export default {
     border: none
   }
 
+  /*
+   * Define score preset styles.
+   */
   .scorePreset {
     box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
     display: inline-block;

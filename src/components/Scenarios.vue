@@ -2,6 +2,7 @@
   <div class="game">
     <div class="columns">
       <div class="column">
+        <!-- Scenarios Listing Menu -->
         <div class="box has-text-centered">
           <h1 class="title is-1">Scenarios</h1>
 
@@ -11,11 +12,14 @@
       </div>
     </div>
 
+    <!-- The List of all Scenarios -->
     <div class="columns is-multiline">
       <div class="column is-12" v-for="scenario in scenarios">
         <div class="box">
           <div class="columns">
             <div class="column is-narrow">
+
+              <!-- The scenario miniature -->
               <canvas
                 class="game-canvas"
                 :ref="`canvas-${scenario.id}`"
@@ -32,6 +36,7 @@
               </a>
             </div>
 
+            <!-- High scores table. -->
             <div class="column">
               <div class="columns is-multiline">
                 <div class="column is-12 has-text-centered">
@@ -56,6 +61,7 @@
               </div>
             </div>
 
+            <!-- List of people who attempted -->
             <div class="column">
               <div class="columns is-multiline">
                 <div class="column is-12 has-text-centered">

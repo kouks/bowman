@@ -2,6 +2,7 @@
   <div class="game">
     <div class="columns">
       <div class="column">
+        <!-- The game canvas -->
         <div class="box game-container">
           <canvas
             class="game-canvas"
@@ -26,6 +27,7 @@
       </div>
     </div>
 
+    <!-- Game menu buttons -->
     <div class="columns">
       <div class="column">
         <div class="box has-text-centered">

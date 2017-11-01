@@ -2,9 +2,12 @@
   <div class="game">
     <div class="columns">
       <div class="column is-6 is-offset-3">
+
+        <!-- The registration box -->
         <div class="box">
           <h1 class="title is-1 has-text-centered">Register</h1>
 
+          <!-- Username field -->
           <div class="field">
             <label class="label">Username</label>
             <div class="control">
@@ -19,6 +22,7 @@
             <p class="help is-danger" v-show="errors.usernameTooShort">Username needs to be at least 3 characters long.</p>
           </div>
 
+          <!-- Password field -->
           <div class="field">
             <label class="label">Password</label>
             <div class="control">
@@ -31,6 +35,7 @@
             </div>
           </div>
 
+          <!-- Repeat password field -->
           <div class="field">
             <div class="control">
               <input
@@ -44,6 +49,46 @@
             <p class="help is-danger" v-show="errors.passwordTooShort">Passwords needs to be at least 6 characters long.</p>
           </div>
 
+          <!-- Email field -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input
+                v-model="credentials.email"
+                :class="['input', emailClass]"
+                type="tel"
+                placeholder="Your email address"
+              >
+            </div>
+            <p class="help is-danger" v-show="errors.emailInvalid">The email is invalid.</p>
+          </div>
+
+          <!-- Phone # field -->
+          <div class="field">
+            <label class="label">Phone #</label>
+            <div class="field is-expanded">
+              <div class="field has-addons">
+                <div class="field-body">
+                  <p class="control">
+                    <a class="button is-static">
+                      +44
+                    </a>
+                  </p>
+                  <p class="control">
+                    <input
+                      v-model="credentials.phone"
+                      :class="['input', phoneClass]"
+                      type="number"
+                      placeholder="Your phone number"
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <p class="help is-danger" v-show="errors.phoneNumberInvalid">The phone number is invalid.</p>
+          </div>
+
+          <!-- Action buttons -->
           <div class="field is-grouped">
             <div class="control">
               <button class="button is-primary" @click="attemptRegister()">Register</button>
@@ -72,7 +117,9 @@ export default {
         usernameTaken: false,
         passwordsDontMatch: false,
         passwordTooShort: false,
-        usernameTooShort: false
+        usernameTooShort: false,
+        emailInvalid: false,
+        phoneNumberInvalid: false
       }
     }
   },
@@ -84,6 +131,14 @@ export default {
 
     passwordClass () {
       return (this.errors.passwordsDontMatch || this.errors.passwordTooShort) ? 'is-danger' : ''
+    },
+
+    emailClass () {
+      return this.errors.emailInvalid ? 'is-danger' : ''
+    },
+
+    phoneClass () {
+      return this.errors.phoneNumberInvalid ? 'is-danger' : ''
     }
   },
 
@@ -95,6 +150,8 @@ export default {
       this.checkPasswordsDontMatch()
       this.checkPasswordTooShort()
       this.checkUsernameTooShort()
+      this.checkEmailInvalid()
+      this.checkPhoneNumberInvalid()
 
       if (this.hasErrors()) {
         return
@@ -102,7 +159,9 @@ export default {
 
       let user = User.create({
         username: this.credentials.username,
-        password: hash(this.credentials.password)
+        password: hash(this.credentials.password),
+        email: this.credentials.email,
+        phone: this.credentials.phone
       })
 
       Auth.login(user)
@@ -115,6 +174,8 @@ export default {
       this.errors.passwordsDontMatch = false
       this.errors.usernameTooShort = false
       this.errors.passwordTooShort = false
+      this.errors.emailInvalid = false
+      this.errors.phoneNumberInvalid = false
     },
 
     checkUsernameTaken () {
@@ -138,6 +199,18 @@ export default {
     checkUsernameTooShort () {
       if (this.credentials.username === undefined || this.credentials.username.length < 3) {
         this.errors.usernameTooShort = true
+      }
+    },
+
+    checkEmailInvalid () {
+      if (this.credentials.email === undefined || !this.credentials.email.match(/\S+@\S+\.\S+/)) {
+        this.errors.emailInvalid = true
+      }
+    },
+
+    checkPhoneNumberInvalid () {
+      if (this.credentials.phone === undefined || !this.credentials.phone.match(/[0-9]/)) {
+        this.errors.phoneNumberInvalid = true
       }
     },
 

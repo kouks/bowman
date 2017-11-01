@@ -2,6 +2,7 @@
   <div class="game">
     <div class="columns">
       <div class="column">
+        <!-- The main game menu -->
         <div class="box has-text-centered">
           <h1 class="title is-1">Bowman</h1>
           <p class="subtitle">Welcome, <span class="has-text-primary">{{ user.username }}</span>, click play and enjoy the awesomeness.</p>
